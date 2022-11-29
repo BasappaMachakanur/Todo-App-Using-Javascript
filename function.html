@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    
+    <title>Document</title>
+    <style>
+        nav{
+            height: 80px;
+            background-color: blue;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+        }
+        nav div{
+            font-size: 30px;
+            color: white;
+        }
+       #container{
+        display: flex;
+        justify-content: center;
+        height: 150px;
+        align-items: center;
+    }
+ div input{
+    margin: 10px;
+    padding: 8px;
+    border-radius: 8px;
+ }
+
+ div button{
+    background-color: aqua;
+    height: 40px;
+    width: 70px;
+    border-radius: 10px;
+ }
+
+ #list{
+     margin: 0 auto; 
+     width: 50%;
+ }
+
+ .list_item{
+    background-color: lightblue;
+    padding: 10px;
+    list-style-type: none;
+    width: 50%;
+    margin: 10px auto;
+    border-radius: 10px;
+    color:white;
+    font-size: 25px;
+ }
+    </style>
+</head>
+<body>
+   <nav>
+    <div> TasklistApp</div>
+   </nav>
+
+   <div id="container">
+          <div>
+            <label>Enter your Task</label>
+          </div>
+          <div>
+            <input id="Task_input" type="text" placeholder="Enter task" >
+          </div>
+          <div>
+            <button onclick="handledata()">Submit</button>
+          </div>
+   </div>
+   <div>
+    <ul id="list">
+
+    </ul>
+   </div>
+    <script>
+        
+        let Task_input=document.getElementById("Task_input");
+          console.log(Task_input);
+          let taskList=[]
+
+        let handledata=()=>{
+         let value=Task_input.value.trim();
+     if(value){
+        console.log(value)
+        Task_input.value=""
+        addtodo(value)
+        const todos = !localStorage.getItem("task")
+        ? []
+        : JSON.parse(localStorage.getItem("task"));
+         todos.push(value);
+         localStorage.setItem("task", JSON.stringify(todos));
+      }
+    }
+
+    window.addEventListener("DOMContentLoaded",()=>{
+        console.log("............")
+        const todos = !localStorage.getItem("task")
+        ? []
+        : JSON.parse(localStorage.getItem("task"));
+        todos.map((a)=>{
+            addtodo(a);
+        })
+    })
+
+    function addtodo(value){
+        let li=document.createElement("li");
+          li.innerText=value;
+          li.setAttribute("class","list_item")
+        let ul=document.getElementById("list");
+               ul.appendChild(li);
+    }
+
+      
+
+
+       
+
+     </script>
+</body>
+</html>
